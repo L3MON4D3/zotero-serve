@@ -47,9 +47,9 @@ def collectionitems(id) :
         inner join
             fields on itemData.fieldID = fields.fieldID
         where
-            collectionItems.collectionID = {id} and
-            items.itemID not in (select itemID from deletedItems) and
-            fieldName = "title"
+            collectionItems.collectionID = {id}
+            and items.itemID not in (select itemID from deletedItems)
+            and fieldName = "title"
         ;
     ''')
     
@@ -88,7 +88,17 @@ def items(id) :
         
     # pp(fields)
     
-    attachments_cursor = cursor.execute(f"select key,path from itemAttachments inner join items on itemAttachments.itemID = items.itemID where itemAttachments.parentItemID={id} and items.itemID not in (select itemID from deletedItems)")
+    attachments_cursor = cursor.execute(f'''
+        select
+            key,path
+        from
+            itemAttachments
+        inner join
+            items on itemAttachments.itemID = items.itemID
+        where
+            itemAttachments.parentItemID={id}
+            and items.itemID not in (select itemID from deletedItems)
+    ''')
 
     attachment_list = Markup("<ul>")
     for res in attachments_cursor :
