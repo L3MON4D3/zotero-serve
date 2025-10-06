@@ -3,9 +3,13 @@ import sqlite3
 from urllib.parse import quote_plus
 from markupsafe import Markup
 from pprint import pp
+import os
 
 ZOTERO_STORAGE_DIR = "/srv/misc/zotero/data/storage"
-DBPATH = "/mnt/zotero/zotero.sqlite"
+DBPATH_ORIG = "/mnt/zotero/zotero.sqlite"
+DBPATH = "/home/simon/projects/zotero-serve/zotero.sqlite"
+
+os.system(f"cp {DBPATH_ORIG} {DBPATH}")
 
 app = Flask(__name__)
 
@@ -16,6 +20,9 @@ def storage(path):
 
 @app.route('/')
 def index() :
+    # refresh guaranteed-unlocked db.
+    os.system(f"cp {DBPATH_ORIG} {DBPATH}")
+
     zotdb = sqlite3.connect(DBPATH)
     cursor = zotdb.cursor()
 
