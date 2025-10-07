@@ -31,7 +31,16 @@ def index() :
     cursor = zotdb.cursor()
 
     collectionlist = Markup("<ul>")
-    for (id,name) in cursor.execute("select collectionID, collectionName from collections;").fetchall() :
+    for (id,name) in cursor.execute(
+        """
+            select
+                collections.collectionID, collectionName
+            from
+                collections
+            where
+                collections.collectionID not in (select collectionID from deletedCollections)
+            ;
+        """).fetchall() :
         collectionlist += Markup("<li class='bulletless'><a href='%s'>%s</a></li>") % (url_for("collectionitems", id=id), name)
     collectionlist += Markup("</ul>")
 
