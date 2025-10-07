@@ -4,11 +4,14 @@ from urllib.parse import quote_plus
 from markupsafe import Markup
 from pprint import pp
 import os
+import tempfile
 
-ZOTERO_STORAGE_DIR = "/srv/misc/zotero/data/storage"
-DBPATH_ORIG = "/mnt/zotero/zotero.sqlite"
-DBPATH = "/home/simon/projects/zotero-serve/zotero.sqlite"
 
+ZOTERO_STORAGE_DIR = os.environ["ZOTERO_STORAGE_DIR"] # "/srv/misc/zotero/data/storage"
+DBPATH_ORIG = os.environ["DBPATH_ORIG"] # "/mnt/zotero/zotero.sqlite"
+
+tmpdir = tempfile.mkdtemp()
+DBPATH = os.path.join(tmpdir, "zotero.sqlite") # "/home/simon/projects/zotero-serve/zotero.sqlite"
 os.system(f"cp {DBPATH_ORIG} {DBPATH}")
 
 app = Flask(__name__)
