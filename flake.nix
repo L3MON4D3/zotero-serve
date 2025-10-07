@@ -9,7 +9,7 @@
   outputs = { self, flake-utils, ... }@inputs : flake-utils.lib.eachDefaultSystem(system: let
     pkgs = import inputs.nixpkgs-unstable { inherit system; };
   in {
-    packages.default = pkgs.hello;
+    packages.default = pkgs.callPackage ./package.nix {};
     devShells.default = pkgs.mkShell {
       packages = with pkgs; [
         python3
