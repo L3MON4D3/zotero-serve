@@ -375,3 +375,35 @@ p.fakepre {
 li.bulletless {
 	list-style-type: none;
 }
+
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+	text-indent: initial;
+	border: solid 2px;
+	border-radius: 5px;
+	border-color: gray;
+
+	& caption {
+		margin-block: 1rlh;
+	}
+
+	:is(td,th) {
+		border-left: solid 1px;
+		border-top: solid 1px;
+		padding: .5ch 1ch;
+		border-color: lightgray;
+	}
+	th {
+		border-top: none;
+	}
+
+	td:first-child, th:first-child {
+		border-left: none;
+	}
+}
+
+.fieldname {
+	font-family: monospace;
+	vertical-align: top;
+}
