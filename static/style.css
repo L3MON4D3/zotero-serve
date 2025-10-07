@@ -382,7 +382,6 @@ table {
 	text-indent: initial;
 	border: solid 2px;
 	border-radius: 5px;
-	border-color: gray;
 
 	& caption {
 		margin-block: 1rlh;
@@ -392,7 +391,6 @@ table {
 		border-left: solid 1px;
 		border-top: solid 1px;
 		padding: .5ch 1ch;
-		border-color: lightgray;
 	}
 	th {
 		border-top: none;
@@ -400,6 +398,25 @@ table {
 
 	td:first-child, th:first-child {
 		border-left: none;
+	}
+}
+
+@media screen and (prefers-color-scheme: light) {
+	table {
+		border-color: #454545;
+
+		:is(td,th) {
+			border-color: #d3d3d3;
+		}
+	}
+}
+@media screen and (prefers-color-scheme: dark) {
+	table {
+		border-color: #a9a9a9;
+
+		:is(td,th) {
+			border-color: #3c3c3c;
+		}
 	}
 }
 
