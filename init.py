@@ -140,9 +140,9 @@ def render_link(itemID, itemTypeID, name, key, path) :
             return Markup("")
         fname = path[8:]
         storage_file = f"{key}/{fname}"
-        return Markup("<a href='%s'>file: %s</a>") % (url_for("storage", path = storage_file), fname)
+        return Markup("<a href='%s' class='file'>%s</a>") % (url_for("storage", path = storage_file), fname)
     else:
-        return Markup("<a href='%s'>item: %s</a>") % (url_for("items", id=itemID), name) 
+        return Markup("<a href='%s' class='item'>%s</a>") % (url_for("items", id=itemID), name) 
     
     
 @app.route('/collection/<int:id>')
