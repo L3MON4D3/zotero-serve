@@ -23,16 +23,12 @@
       mkdir -p $out/share/zotero-serve
       cp -r $src/* $out/share/zotero-serve
     '';
-
-    buildInputs = [
-      python3Packages.flask
-      python3
-    ];
   });
 in writeShellApplication {
   name = "zotero-serve";
-  runtimeInputs = [ granian zotero-serve-wsgi ];
+  runtimeInputs = [ granian ];
   text = ''
+    export PYTHONPATH=${python3.pkgs.makePythonPath [python3Packages.flask]}
     granian --interface wsgi ${zotero-serve-wsgi}/share/zotero-serve/init
   '';
 }
