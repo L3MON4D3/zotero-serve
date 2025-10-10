@@ -10,7 +10,7 @@
 body {
 	font-family: Open Sans, Arial;
 	color: var(--textcolor);
-	font-size: 1rem;
+	font-size: 16px;
 	margin: 2em auto;
 	max-width: 60em;
 	padding: 1em;
@@ -27,9 +27,16 @@ a {
 	text-underline-offset: .1rem;
 }
 
-
+/* Make linebreak stick close to the line above */
 li.bulletless {
 	list-style-type: none;
+	line-height: 110%;
+}
+
+/* add margin between bulletless elements -> easier to differentiate linebreak
+  and next item in the list. */
+li.bulletless:not(:last-child) {
+	margin-bottom: 6px;
 }
 
 table {
